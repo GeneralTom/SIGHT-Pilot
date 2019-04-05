@@ -45,20 +45,17 @@ void loop() {
    * After testing the joystick for directions, it output the following:
    * 0 = left, 1000 = right
    */
-  if (x_axis <= 450)
-  {
+  if (x_axis <= 450) {
     // Lights up the LEFT LED
     setLED(LEFT, LED_ON);
     setLED(RIGHT, LED_OFF);
   }
-  else if (x_axis >= 550)
-  {
+  else if (x_axis >= 550) {
     // Lights up the RIGHT LED
     setLED(LEFT, LED_OFF);
     setLED(RIGHT, LED_ON);
   }
-  else
-  {    
+  else {    
     // If the stick is centered, both the LEFT and RIGHT LEDs will be off
     setLED(LEFT, LED_OFF);
     setLED(RIGHT, LED_OFF);
@@ -70,20 +67,17 @@ void loop() {
    * After testing the joystick for directions, it output the following:
    * 0 = up, 1000 = down
    */
-  if (y_axis <= 450)
-  {
-    // Lights up the top 
+  if (y_axis <= 450) {
+    // Lights up the UP LED 
     setLED(UP, LED_ON);
     setLED(DOWN, LED_OFF);
   }
-  else if (y_axis >= 550)
-  {
-    // Lights up the bottom LED
+  else if (y_axis >= 550) {
+    // Lights up the DOWN LED
     setLED(UP, LED_OFF);
     setLED(DOWN, LED_ON);
   }
-  else
-  {
+  else {
     // The stick is centered, so both LEDs are off.
     setLED(UP, LED_OFF);
     setLED(DOWN, LED_OFF);
@@ -96,7 +90,6 @@ void loop() {
  * The function below is used for adjusting the brightness for each of the LEDs
  */
 
-void setLED(const int& direction, const int& brightness)
-{
+void setLED(const int& direction, const int& brightness) {
   analogWrite(direction, brightness);
 }
