@@ -10,6 +10,10 @@ const int LEFT = 9;
 const int RIGHT = 10;
 const int UP = 11;
 
+// Constants
+const int LED_ON = 255;
+const int LED_OFF = 0;
+
 // Initial values
 int switch_state = 0;
 int x_axis = 0;
@@ -33,7 +37,7 @@ void loop() {
    * In this case, the switch uses negative logic.
    * So, the LED will light up if the joystick sends back a zero.
    */
-  switch_state == 0 ? setLEDButton(255) : setLEDButton(0);
+  switch_state == 0 ? setLED(BUTTON, LED_ON) : setLED(BUTTON, LED_OFF);
 
   /**
    * This first section of if statements controls the LEFT and RIGHT LEDs.
@@ -44,20 +48,20 @@ void loop() {
   if (x_axis <= 450)
   {
     // Lights up the LEFT LED
-    setLEDLeft(255);
-    setLEDRight(0);
+    setLED(LEFT, LED_ON);
+    setLED(RIGHT, LED_OFF);
   }
   else if (x_axis >= 550)
   {
     // Lights up the RIGHT LED
-    setLEDLeft(0);
-    setLEDRight(255);
+    setLED(LEFT, LED_OFF);
+    setLED(RIGHT, LED_ON);
   }
   else
   {    
     // If the stick is centered, both the LEFT and RIGHT LEDs will be off
-    setLEDLeft(0);
-    setLEDRight(0);
+    setLED(LEFT, LED_OFF);
+    setLED(RIGHT, LED_OFF);
   }
 
   /**
@@ -68,47 +72,31 @@ void loop() {
    */
   if (y_axis <= 450)
   {
-    // Lights up the top LED
-    setLEDUp(255);
-    setLEDDown(0);
+    // Lights up the top 
+    setLED(UP, LED_ON);
+    setLED(DOWN, LED_OFF);
   }
   else if (y_axis >= 550)
   {
     // Lights up the bottom LED
-    setLEDUp(0);
-    setLEDDown(255);
+    setLED(UP, LED_OFF);
+    setLED(DOWN, LED_ON);
   }
   else
   {
     // The stick is centered, so both LEDs are off.
-    setLEDUp(0);
-    setLEDDown(0);
+    setLED(UP, LED_OFF);
+    setLED(DOWN, LED_OFF);
   }
   
   delay(100);
 }
 
-void setLEDUp(int brightness)
-{
-  analogWrite(UP, brightness);
-}
+/**
+ * The function below is used for adjusting the brightness for each of the LEDs
+ */
 
-void setLEDDown(int brightness)
+void setLED(const int& direction, const int& brightness)
 {
-  analogWrite(DOWN, brightness);
-}
-
-void setLEDLeft(int brightness)
-{
-  analogWrite(LEFT, brightness);
-}
-
-void setLEDRight(int brightness)
-{
-  analogWrite(RIGHT, brightness);
-}
-
-void setLEDButton(int brightness)
-{
-  analogWrite(BUTTON, brightness);
+  analogWrite(direction, brightness);
 }
